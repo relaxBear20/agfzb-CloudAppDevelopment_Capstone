@@ -24,7 +24,7 @@ from django.utils.timezone import now
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 class CarDealer:
 
-    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
+    def __init__(self, address, city, full_name, id, lat, long, short_name, zip,state):
         # Dealer address
         self.address = address
         # Dealer city
@@ -40,9 +40,11 @@ class CarDealer:
         # Dealer short name
         self.short_name = short_name
         # Dealer state
-        self.st = st
         # Dealer zip
         self.zip = zip
+
+        self.state = state
+
 
     def __str__(self):
         return "Dealer name: " + self.full_name
@@ -50,7 +52,7 @@ class CarDealer:
 # <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview:
 
-    def __init__(self, dealership, name, purchase, review, purchase_date, car_make, car_model, car_year, id):
+    def __init__(self, dealership, name, purchase, review, purchase_date, car_make, car_model, car_year):
         self.dealership = dealership
         self.name = name
         self.purchase = purchase

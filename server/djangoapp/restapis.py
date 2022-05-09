@@ -48,7 +48,7 @@ def get_dealers_from_cf(url, **kwargs):
             dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
                                    id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
                                    short_name=dealer["short_name"],
-                                   st=dealer["st"], zip=dealer["zip"])
+                                    zip=dealer["zip"], state=dealer["state"])
             results.append(dealer_obj)
 
     return results
@@ -61,20 +61,22 @@ def get_dealer_reviews_from_cf (url, dealer_id):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url, dealership=dealer_id)
-    print(json_result)
 
     if json_result:
         # Get the row list in JSON as dealers
         rvs = json_result["data"]
         # For each dealer object
-        for rv  in rvs:
+
+        if not rvs: 
+            return results
+        for rv in rvs:
+            print(rv)
             # Get its content in `doc` object
             # Create a CarDealer object with values in `doc` object
             #name, purchase, review, purchase_date, car_make, car_model, car_year, sentiment, id
             obj = DealerReview(dealership=rv["dealership"], name=rv["name"], purchase=rv["purchase"],
-                                   id=rv["id"], review=rv["review"], purchase_date=rv["purchase_date"],
-                                   car_make=rv["car_make"],
-                                   car_model=rv["car_model"], car_year=rv["car_year"])
+                                    review=rv["review"], purchase_date=rv["purchase_date"],
+                                   car_make=rv["car_make"], car_model=rv["car_model"], car_year=rv["car_year"])
             obj.sentiment = analyze_review_sentiments(obj.review)
             
             results.append(obj)
@@ -118,3 +120,20 @@ def analyze_review_sentiments(text):
     sentimentresult = sentiment_label
     
     return sentimentresult
+
+
+def post_request(url, json_payload, **kwargs):
+    print(kwargs)
+    print("GET from {} ".format(url))
+    try:
+        # Call get method of requests library with URL and parameters
+        # no authentication GET
+            response = requests.post(url, params=kwargs, json=json_payload)
+
+    except:
+        # If any error occurs
+        print("Network exception occurred")
+    status_code = response.status_code
+    print("With status {} ".format(status_code))
+    json_data = json.loads(response.text)
+    return json_data

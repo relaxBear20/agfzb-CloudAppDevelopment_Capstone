@@ -122,17 +122,11 @@ def analyze_review_sentiments(text):
     return sentimentresult
 
 
-def post_request(url, json_payload, **kwargs):
+def post_request(url, payload, **kwargs):
     print(kwargs)
-    print("GET from {} ".format(url))
-    try:
-        # Call get method of requests library with URL and parameters
-        # no authentication GET
-            response = requests.post(url, params=kwargs, json=json_payload)
-
-    except:
-        # If any error occurs
-        print("Network exception occurred")
+    print("POST to {} ".format(url))
+    print(payload)
+    response = requests.post(url, params=kwargs, json=payload)
     status_code = response.status_code
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)

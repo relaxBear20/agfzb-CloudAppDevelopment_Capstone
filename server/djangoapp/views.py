@@ -60,7 +60,7 @@ def registration_request(request):
             return redirect("djangoapp:index")
         else:
             context['message'] = "User already exists."
-            return render(request, 'djangoapp/user_registration_bootstrap.html', context)
+            return redirect("djangoapp:registration")
 
 
 def login_request(request):

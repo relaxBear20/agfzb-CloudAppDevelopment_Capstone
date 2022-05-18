@@ -6,6 +6,6 @@
     buildpack: python_buildpack
   - name: djangoapp-nginx
     routes:
-      - route: olo.au-syd.cf.appdomain.cloud/static
+      - route: phu.au-syd.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack

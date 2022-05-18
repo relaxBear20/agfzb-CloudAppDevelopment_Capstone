@@ -1,7 +1,7 @@
   applications:
   - name: djangoapp
     routes:
-      - route: olo.au-syd.cf.appdomain.cloud
+      - route: phu.au-syd.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
   - name: djangoapp-nginx

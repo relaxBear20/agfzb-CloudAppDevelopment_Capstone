@@ -1,10 +1,10 @@
   applications:
-  - name: djangoapp
+  - name: phu.au-syd.cf.appdomain.cloud
     routes:
       - route: phu.au-syd.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
-  - name: djangoapp-nginx
+  - name: phu.au-syd.cf.appdomain.cloud
     routes:
       - route: phu.au-syd.cf.appdomain.cloud/static
     memory: 128M
